@@ -1,5 +1,5 @@
 class Seat {
-     constructor(x, y, seatClass, seatType) {
+    constructor(x, y, seatClass, seatType) {
         this.x = x;
         this.y = y;
 
@@ -8,10 +8,11 @@ class Seat {
 
         this.price = 100;
         this.isBooked = false;
-    }}
+    }
+}
 
 class Aisle {
-    constructor(x,y) {
+    constructor(x, y) {
         this.x = x;
         this.y = y;
     }
@@ -34,26 +35,26 @@ class Plane {
             for (let j = 0; j < this.cols; j += 1) {
                 //Check for aisle
                 if (j == 3 || j == 8) {
-                    this.grid[i].push(new Aisle(i,j))
+                    this.grid[i].push(new Aisle(i, j))
                 } else {
-                //Check for seat type
-                //Window seat
-                if (j == 0 || j == 11) {
-                    seatType = "Window"
-                }
-                ///Middle seat
-                if (j == 1 || j == 5 || j == 6 || j == 10) {
-                    seatType = "Middle"
-                }
-                // Aisle seat
-                if (j == 2 || j == 4 || j == 7 || j == 9 ) {
-                    seatType = "Aisle"
-                }
-                //Check for first class
-                if (i < 5) {
-                    seatClass = "First-class"
-                }
-                this.grid[i].push(new Seat(i,j,seatClass,seatType))
+                    //Check for seat type
+                    //Window seat
+                    if (j == 0 || j == 11) {
+                        seatType = "Window"
+                    }
+                    ///Middle seat
+                    if (j == 1 || j == 5 || j == 6 || j == 10) {
+                        seatType = "Middle"
+                    }
+                    // Aisle seat
+                    if (j == 2 || j == 4 || j == 7 || j == 9) {
+                        seatType = "Aisle"
+                    }
+                    //Check for first class
+                    if (i < 5) {
+                        seatClass = "First-class"
+                    }
+                    this.grid[i].push(new Seat(i, j, seatClass, seatType))
                 }
 
             }
@@ -67,6 +68,19 @@ class Passenger {
         this.painPoint = painPoint;
     }
 }
+
+class PriceCalculator {
+    constructor() {
+        this.stack = []
+        
+    }
+
+    PriceCalculator() {
+        
+
+    }
+}
+
 
 let Passenger = new Passenger("window", 350)
 
