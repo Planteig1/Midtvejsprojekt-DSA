@@ -4,6 +4,12 @@ Klon repo'et ned, og åben html-filen i din browser ved at dobbeltklikke på ind
 
 Allerede her burde det alt sammen være oppe at køre - hvis dette ikke virker, så åben index.html og script.js i VSC (eller anden IDE), og åben derefter index.html.
 
+## VSC Extensions
+Name: vscode-pdf
+VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=tomoki1207.pdf
+
+
+
 ## Running the simulation
 
 Når visualiseringen er oppe at køre, vil den med det samme indlæse en visualisering af et fly med pladser. Ved siden af flyet vil der være
