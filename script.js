@@ -6,7 +6,8 @@ class Seat {
         this.seatClass = seatClass;
         this.seatType = seatType;
 
-        this.price = 100
+        this.price = 100;
+        this.isBooked = false;
     }}
 
 class Aisle {
@@ -21,6 +22,7 @@ class Plane {
         this.grid = [];
         this.cols = cols;
         this.rows = rows;
+        this.occupiedSeats = [];
     }
 
 
@@ -58,6 +60,16 @@ class Plane {
         }
     }
 }
+
+class Passenger {
+    constructor(preferance, painPoint) {
+        this.preferance = preferance;
+        this.painPoint = painPoint;
+    }
+}
+
+let Passenger = new Passenger("window", 350)
+
 let plane = new Plane(12, 20)
 plane.InitializeGrid()
 console.log(plane.grid)
