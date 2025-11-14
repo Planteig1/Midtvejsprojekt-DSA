@@ -62,34 +62,7 @@ class Plane {
     }
 }
 
-class Passenger {
-    constructor(preferance, painPoint) {
-        this.preferance = preferance;
-        this.painPoint = painPoint;
-    }
-}
 
-class PriceCalculator {
-    constructor() {
-        this.stack = []
-        
-    }
-
-    PriceCalculator(grid, occupiedSeats) {
-        occupiedSeats.forEach(occupiedSeat => {
-            occupiedSeat.price *= 1.2;
-            // Insert the seat back into the grid, at it's x and y coordinates
-            grid.splice([occupiedSeat.x][occupiedSeat.y],0,occupiedSeat)
-            occupiedSeats.remove(occupiedSeat)
-        });
-
-    }
-}
-
-
-
-
-let Passenger = new Passenger("window", 350)
 
 let plane = new Plane(12, 20)
 plane.InitializeGrid()
