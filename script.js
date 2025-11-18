@@ -68,4 +68,11 @@ let plane = new Plane(12, 20)
 plane.InitializeGrid()
 console.log(plane.grid)
 
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+const img = document.getElementById("plane");
+ctx.fillStyle = "white";
+ctx.fillRect(0,0,900,900);
+ctx.drawImage(img, 200, 200);
+
 
