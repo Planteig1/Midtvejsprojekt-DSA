@@ -63,19 +63,12 @@ class Plane {
     getSeat(x,y) {
         return this.grid[x][y]; // Handle if we try to look for something thats not a seat
     }
-    bookSeat(x,y) {
-        let currentSeat = this.grid[x][y]
-        //Check special case - Trying to book an aisle object
-        if (!currentSeat == Seat)  {
-            return false; // Placebo?
+    bookSeat(seat) {
+        if (seat.isBooked != true && seat instanceof Seat) {
+            seat.isBooked = true;
+        } else {
+            console.log("Couldnt book seat")
         }
-        //Check special case - Trying to book an already booked seat
-        if (currentSeat.isBooked == true) {
-            console.log("This seat is already booked")
-            return; 
-        }
-
-        currentSeat.isBooked = true;
     }
 }
 
@@ -83,7 +76,11 @@ class Plane {
 
 let plane = new Plane(12, 20)
 plane.InitializeGrid()
-console.log(plane.grid)
+plane.bookSeat(plane.getSeat(0,0))
+
+
+
+
 
 
 
