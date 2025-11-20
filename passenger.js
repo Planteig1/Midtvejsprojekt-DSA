@@ -5,4 +5,4 @@ class Passenger {
     }
 }
 
-let Passenger = new Passenger("window", 350)
+let passenger = new Passenger("window", 350)

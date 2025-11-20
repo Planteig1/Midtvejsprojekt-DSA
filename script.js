@@ -60,6 +60,23 @@ class Plane {
             }
         }
     }
+    getSeat(x,y) {
+        return this.grid[x][y]; // Handle if we try to look for something thats not a seat
+    }
+    bookSeat(x,y) {
+        let currentSeat = this.grid[x][y]
+        //Check special case - Trying to book an aisle object
+        if (!currentSeat == Seat)  {
+            return false; // Placebo?
+        }
+        //Check special case - Trying to book an already booked seat
+        if (currentSeat.isBooked == true) {
+            console.log("This seat is already booked")
+            return; 
+        }
+
+        currentSeat.isBooked = true;
+    }
 }
 
 
@@ -67,6 +84,8 @@ class Plane {
 let plane = new Plane(12, 20)
 plane.InitializeGrid()
 console.log(plane.grid)
+
+
 
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
