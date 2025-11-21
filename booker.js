@@ -7,8 +7,9 @@ const returnsTrue25Percent = () => {
 
 
 class Booker {
-    constructor(plane) {
+    constructor(plane, seat) {
         this.plane = plane;
+        this.seat = seat;
     }
 
 
@@ -27,5 +28,13 @@ class Booker {
 
         }
     }
+    // work in progress - jonathan (skal det her overhovedet bruges?)
+    priceChanger() {
+        let seatToChange = this.plane.grid[startX][startY]
+        if (currentSeat.isBooked == true) {
+            this.seat.price * 1.5;
+        }
+    }
     
 }
+

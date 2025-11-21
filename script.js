@@ -60,15 +60,29 @@ class Plane {
             }
         }
     }
-    getSeat(x,y) {
+    getSeat(x, y) {
         return this.grid[x][y]; // Handle if we try to look for something thats not a seat
     }
     bookSeat(seat) {
         if (seat.isBooked != true && seat instanceof Seat) {
             seat.isBooked = true;
+            console.log("Seat is now booked");
+            
         } else {
-            console.log("Couldnt book seat")
+            console.log("Couldnt book seat");
         }
+    }
+
+    priceChanger(seat) {
+        if (seat.isBooked == true) {
+            seat.price = seat.price * 2;
+            console.log("Price has been changed");
+            
+        } else {
+            console.log("Seat has not been booked");
+            
+        }
+
     }
 }
 
@@ -76,7 +90,16 @@ class Plane {
 
 let plane = new Plane(12, 20)
 plane.InitializeGrid()
-plane.bookSeat(plane.getSeat(0,0))
+plane.bookSeat(plane.getSeat(0, 0))
+plane.bookSeat(plane.getSeat(0, 1))
+plane.priceChanger(plane.getSeat(0, 1));
+console.log(plane.getSeat(0, 1));
+
+// TODO / INFO --- 
+// Price changer virker, men gemmer ikke data på sæde hen over reloads -
+// så vi skal lave en måde hvor du kan køre igen uden at genstarte siden
+
+
 
 
 
@@ -89,6 +112,6 @@ const ctx = canvas.getContext("2d");
 const img = document.getElementById("plane");
 ctx.fillStyle = "white";
 // ctx.fillRect(0,0,900,900);
-ctx.drawImage(img, 0,0);
+ctx.drawImage(img, 0, 0);
 
 
