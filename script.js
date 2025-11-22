@@ -67,7 +67,7 @@ class Plane {
         if (seat.isBooked != true && seat instanceof Seat) {
             seat.isBooked = true;
             console.log("Seat is now booked");
-            
+
         } else {
             console.log("Couldnt book seat");
         }
@@ -77,10 +77,10 @@ class Plane {
         if (seat.isBooked == true) {
             seat.price = seat.price * 2;
             console.log("Price has been changed");
-            
+
         } else {
             console.log("Seat has not been booked");
-            
+
         }
 
     }
@@ -92,19 +92,43 @@ let plane = new Plane(12, 20)
 plane.InitializeGrid()
 plane.bookSeat(plane.getSeat(0, 0))
 plane.bookSeat(plane.getSeat(0, 1))
-plane.priceChanger(plane.getSeat(0, 1));
+
+// plane.priceChanger(plane.getSeat(0, 1)); --- Works, commented out for testing
 console.log(plane.getSeat(0, 1));
 
-// TODO / INFO --- 
-// Price changer virker, men gemmer ikke data på sæde hen over reloads -
-// så vi skal lave en måde hvor du kan køre igen uden at genstarte siden
+// function for displaying on html
+function displaySeatPrice() {
+    let seatToChange = plane.getSeat(0, 1); // Hardcoded for example
+    plane.bookSeat(seatToChange); // Ensure the seat is booked for priceChanger to work
+    plane.priceChanger(seatToChange);
+
+    const displayedPriceElement = document.getElementById("displayedPrice");
+    if (displayedPriceElement) {
+        displayedPriceElement.textContent = seatToChange.price;
+    }
+}
 
 
+// work in progress - pseudo code to get a general understanding of what is supposed to happen
+// code works - now we need to make it so it scales when we instantiate many passengers 
+const passenger1 = new Passenger("Window", 350)
+function passengerSeatChecker(x, y) {
+
+    if (plane.getSeat(x, y).price > passenger1.painPoint || plane.getSeat(x, y).seatType != passenger1.preferance) {
+        console.log("Seat not applicable for passenger");
+    }
+
+    if (plane.getSeat(x, y).price <= passenger1.painPoint && plane.getSeat(x, y).seatType == passenger1.preferance) {
+        plane.bookSeat(plane.getSeat(x, y));
+        console.log("Seat has been booked to passenger");
+    }
 
 
+}
 
+console.log(plane.getSeat(1,0));
 
-
+passengerSeatChecker(1, 0)
 
 
 const canvas = document.getElementById("canvas");
