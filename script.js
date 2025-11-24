@@ -67,9 +67,6 @@ class Plane {
         let curretSeat = this.grid[y][x]
         if (curretSeat.isBooked != true && curretSeat instanceof Seat) {
             curretSeat.isBooked = true;
-            
-            plane.priceChanger(curretSeat);
-
 
         } else {
             console.log("Couldnt book seat");
@@ -90,11 +87,11 @@ class Plane {
     priceChanger(seat) {
         if (seat.isBooked == true) {
             seat.price = seat.price + 50;
-            console.log("Price of seat has been changed");
+            // console.log("Price of seat has been changed");
 
         } else if (seat.isBooked == false) {
             seat.price = seat.price - 50;
-            console.log("Seat has not been booked");
+           //  console.log("Seat has not been booked");
 
         }
 
@@ -119,19 +116,32 @@ class Plane {
 
 let plane = new Plane(12, 20)
 plane.InitializeGrid()
-console.log(plane.grid)
 
-let booker = new Booker(plane, "asd")
+
+let booker = new Booker(plane)
 let passengerFactory = new PassengerFactory();
-let passengerList = passengerFactory.createPassengers(200);
-plane.bookSeat(0, 0)
 
-console.log(plane.getAvailableSeats())
-booker.bookSeats(passengerList, plane.getAvailableSeats())
-console.log(plane.getAvailableSeats())
+// Run simulations
 
-console.log(plane.grid)
+     function runSimulation(iterations, passengerFactory, booker,plane) {
 
+        for (let i = 0; i < iterations; i++) {
+
+            console.log(`iteration: ${i}`)
+            //Create passengers
+            let passengerList = passengerFactory.createPassengers(200)
+            
+            //Run the booker
+            booker.bookSeats(passengerList, plane.getAvailableSeats())
+
+            //Reset the seats and update prices
+            plane.seatResetter()
+
+            console.log(plane.getSeat(0,0).price)
+        }
+    }
+    
+runSimulation(30, passengerFactory, booker, plane)
 
 
 
@@ -184,11 +194,6 @@ function passengerSeatChecker(x, y) {
 
 }
     */
-
-console.log(passengerList.length);
-
-
-
 // passengerSeatChecker(1, 0)
 
 

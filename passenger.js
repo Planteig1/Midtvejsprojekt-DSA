@@ -35,10 +35,9 @@ class PassengerFactory {
     createPassengers(numberOfPassengers) {
         let passengerList = [];
         for (let i = 1; i < numberOfPassengers; i++ ) {
-            let currentPassenger = new Passenger(this.seatTypeGenerator(), this.getNormal(110,10));
+            let currentPassenger = new Passenger(this.seatTypeGenerator(), this.getNormal(1000,10));
             passengerList.push(currentPassenger);
         }
-        console.log(passengerList)
         return passengerList;
     }
 }

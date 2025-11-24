@@ -1,8 +1,7 @@
 
 class Booker {
-    constructor(plane, seat) {
+    constructor(plane) {
         this.plane = plane;
-        this.seat = seat;
     }
 
     // Kan eventuelt snakke om noget optimering her: //Add other painpoints/preferances
@@ -15,7 +14,7 @@ class Booker {
                 if (availableSeats[i].price <= passenger.painPoint && passenger.preference == availableSeats[i].seatType) {
                     this.plane.bookSeat(availableSeats[i].y,availableSeats[i].x)
                     availableSeats.splice(i,1);
-                    console.log("Booked with price and preference")
+                    
                     return;
                 }
             }
@@ -25,7 +24,7 @@ class Booker {
                 if (availableSeats[i].price <= passenger.painPoint) {
                     this.plane.bookSeat(availableSeats[i].y,availableSeats[i].x)
                     availableSeats.splice(i,1);
-                    console.log("Booked only with price")
+                    
                     return;
                 }
             }
