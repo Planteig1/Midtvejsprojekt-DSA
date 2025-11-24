@@ -15,13 +15,30 @@ class PassengerFactory {
         return Math.round(mean + (standardNormal * stdDev));
     }
 
+    seatTypeGenerator() {
+        // if between 1-4 Window, 5-6 middle, 7-10 aisle
+        let seatTypeNumber = this.getNormal(5,5);
+        if (seatTypeNumber < 4) {
+            return "Window"
+        }
+        if (seatTypeNumber >= 5 && seatTypeNumber < 7) {
+            return "Middle"
+        }
+
+        return "Aisle"
+    }
+
+
+
+
     // Passenger Creation - Should also add different seat placements - Window, Middle & Aisle
     createPassengers(numberOfPassengers) {
         let passengerList = [];
         for (let i = 1; i < numberOfPassengers; i++ ) {
-            let currentPassenger = new Passenger("Aisle", this.getNormal(110,10));
+            let currentPassenger = new Passenger(this.seatTypeGenerator(), this.getNormal(110,10));
             passengerList.push(currentPassenger);
         }
+        console.log(passengerList)
         return passengerList;
     }
 }
