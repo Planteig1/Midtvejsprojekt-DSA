@@ -66,3 +66,70 @@ canvas#canvas {
     border-radius: 4px; 
     
 }
+
+/* ---------------------------
+   BUTTON STYLING
+----------------------------*/
+button {
+    background: #0078ff;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s ease;
+    margin: 6px 0;
+}
+
+button:hover {
+    background: #005fcc;
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+/* ---------------------------
+   INPUT FIELDS
+----------------------------*/
+input[type="number"] {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    width: 180px;
+    margin-top: 4px;
+    margin-bottom: 12px;
+}
+
+/* ---------------------------
+   LABELS
+----------------------------*/
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 4px;
+}
+
+/* ---------------------------
+   SIMULATION PANEL SPACING
+----------------------------*/
+h2 {
+    margin-top: 40px;
+    margin-bottom: 12px;
+    font-size: 22px;
+}
+
+/* Wrap each input block for nicer spacing */
+div {
+    margin-bottom: 8px;
+}
+
+/* Price display */
+#displayedPrice {
+    font-weight: bold;
+    color: #005fcc;
+}
+

@@ -74,47 +74,10 @@ function displaySeatPrice() {
         displayedPriceElement.textContent = seatToChange.price;
     }
 }
-/*
-
-
-
-
-// work in progress - pseudo code to get a general understanding of what is supposed to happen
-// code works - now we need to make it so it scales when we instantiate many passengers 
-function passengerSeatChecker(x, y) {
-    const thisX = x;
-    const thisY = y;
-    const seat = plane.getSeat(x, y);
-    const responses = [];
-
-    for (let i = 0; i < passengerList.length; i++) {
-        const passenger = passengerList[i];
-        const passengerCount = i + 1;
-
-        if (seat.price > passenger.painPoint || seat.seatType != passenger.preference || seat.isBooked == true) {
-            responses.push(`The seat, seat (${thisX}, ${thisY}), could not be booked for passenger ${passengerCount}`);
-
-        } else if (seat.price <= passenger.painPoint && seat.seatType == passenger.preference && seat.isBooked == false) {
-            plane.bookSeat(plane.getSeat(x, y));
-            responses.push(`The seat, seat (${thisX}, ${thisY}), is now booked to passenger ${passengerCount}`);
-
-        }
-
-    }
-    console.log(responses);
-
-
-}
-    */
-// passengerSeatChecker(1, 0)
-
-/* THE FOLLOWING CODE IS AI GENERATED USING CHATGPT*/
-// ====== SEAT GRID RENDERING ======
-
 
 function getPriceColor(seatPriceInput,) {
     let min = 0
-    let max = 1000
+    let max = 500
     // Prevent division by zero if all prices are the same
     if (max === min) return `hsl(120, 100%, 50%)`;
 

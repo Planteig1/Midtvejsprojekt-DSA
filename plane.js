@@ -91,7 +91,13 @@ class Plane {
             // console.log("Price of seat has been changed");
 
         } else if (seat.isBooked == false) {
-            seat.price = seat.price - 50;
+            if (seat.price <= 0) {
+                seat.price = 0
+            } else {
+                 seat.price = seat.price - 50;
+            }
+
+
            //  console.log("Seat has not been booked");
 
         }
