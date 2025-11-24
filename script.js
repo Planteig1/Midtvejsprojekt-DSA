@@ -4,6 +4,7 @@ plane.InitializeGrid()
 
 let booker = new Booker(plane)
 let passengerFactory = new PassengerFactory();
+renderSeatsHTML();
 
 
 let runSimulationButton = document.getElementById("startSimulation")
