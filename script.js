@@ -28,6 +28,7 @@ runSimulationButton.addEventListener("click", () => {
         seatPriceInput,
         budgetChangeInput
     );
+    
 });
 
 
@@ -49,6 +50,7 @@ async function runSimulation(iterations, passengerFactory, booker,plane,passenge
         plane.seatResetter()
 
         renderSeatsHTML();
+        displayProfit();
 
         await wait(1000)
     }
@@ -129,10 +131,37 @@ function renderSeatsHTML() {
 }
 
 
+// ===== PROFIT CALCULATOR =====
+
+// Sum of all positive price increases on seats
+function calculateTotalProfit() {
+    let totalProfit = 0;
+
+    for (const row of plane.grid) {
+        for (const seat of row) {
+            // Skip aisles, they are not Seat instances
+            if (seat instanceof Seat) {
+                const increase = seat.price - seat.basePrice;
+                if (increase > 0) {
+                    totalProfit += increase;
+                }
+            }
+        }
+    }
+
+    return totalProfit;
+}
+
+// Update the profit text on the page
+function displayProfit() {
+    const profit = calculateTotalProfit();
+    const profitElement = document.getElementById("profitDisplay");
+    if (profitElement) {
+        profitElement.textContent = profit;
+    }
+}
 
 /* THIS IS THE END OF THE AI GENERATED CODE*/
-
-
 
 
 

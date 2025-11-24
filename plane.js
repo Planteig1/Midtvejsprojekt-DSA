@@ -8,6 +8,7 @@ class Seat {
 
         this.price = 100;
         this.isBooked = false;
+        this.basePrice = this.price;
     }
 }
 
