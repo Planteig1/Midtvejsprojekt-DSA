@@ -14,7 +14,6 @@ runSimulationButton.addEventListener("click", () => {
 
     let iterations = parseInt(document.getElementById("iterations").value);
     let passengerCount = parseInt(document.getElementById("passengerCount").value);
-    let seatPriceInput = parseInt(document.getElementById("seatPriceInput").value);
     let budgetChangeInput = parseInt(document.getElementById("budgetChangeInput").value);
     let startingMoneyInput = parseInt(document.getElementById("startingMoneyInput").value);
 
@@ -25,7 +24,7 @@ runSimulationButton.addEventListener("click", () => {
         booker,
         plane,
         passengerCount,
-        seatPriceInput,
+        startingMoneyInput,
         budgetChangeInput
     );
     
@@ -36,12 +35,12 @@ runSimulationButton.addEventListener("click", () => {
 
 const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-async function runSimulation(iterations, passengerFactory, booker,plane,passengerCount,seatPriceInput,budgetChangeInput) {
+async function runSimulation(iterations, passengerFactory, booker,plane,passengerCount,startingMoneyInput,budgetChangeInput) {
     for (let i = 0; i < iterations; i++) {
         console.log(i)
         console.log(plane.getSeat(0,0).price)
         //Create passengers
-        let passengerList = passengerFactory.createPassengers(passengerCount,seatPriceInput,budgetChangeInput)
+        let passengerList = passengerFactory.createPassengers(passengerCount,startingMoneyInput,budgetChangeInput)
 
         //Run the booker
         booker.bookSeats(passengerList, plane.getAvailableSeats())
@@ -80,7 +79,7 @@ function displaySeatPrice() {
 
 function getPriceColor(seatPriceInput,) {
     let min = 0
-    let max = 500
+    let max = 1000
     // Prevent division by zero if all prices are the same
     if (max === min) return `hsl(120, 100%, 50%)`;
 
