@@ -1,11 +1,35 @@
+// Initialize plane, booker and passengers
 let plane = new Plane(12, 20)
 plane.InitializeGrid()
-
 
 let booker = new Booker(plane)
 let passengerFactory = new PassengerFactory();
 
+let runSimulationButton = document.getElementById("startSimulation")
+
+// FIX: read values only when button clicked
+runSimulationButton.addEventListener("click", () => {
+
+    let iterations = parseInt(document.getElementById("iterations").value);
+    let passengerCount = parseInt(document.getElementById("passengerCount").value);
+    let seatPriceInput = parseInt(document.getElementById("seatPriceInput").value);
+    let budgetChangeInput = parseInt(document.getElementById("budgetChangeInput").value);
+    let startingMoneyInput = parseInt(document.getElementById("startingMoneyInput").value);
+
+    // Call your simulation function with the updated values
+    runSimulation(
+        iterations,
+        passengerFactory,
+        booker,
+        plane
+    );
+});
+
+
 // Run simulations
+
+const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
 async function runSimulation(iterations, passengerFactory, booker,plane) {
     for (let i = 0; i < iterations; i++) {
 
@@ -24,8 +48,8 @@ async function runSimulation(iterations, passengerFactory, booker,plane) {
         }
     }
 
-const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-runSimulation(30, passengerFactory, booker, plane)
+
+
 
 
 
