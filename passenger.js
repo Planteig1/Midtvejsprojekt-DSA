@@ -19,7 +19,7 @@ class PassengerFactory {
     createPassengers(numberOfPassengers) {
         let passengerList = []
         for (let i = 1; i < numberOfPassengers; i++ ) {
-            let currentPassenger = new Passenger("Aisle", this.getNormal(100,10))
+            let currentPassenger = new Passenger("Aisle", this.getNormal(400,100))
             passengerList.push(currentPassenger)
         }
         return passengerList
@@ -27,8 +27,8 @@ class PassengerFactory {
 }
 
 class Passenger {
-    constructor(preferance, painPoint) {
-        this.preferance = preferance;
+    constructor(preference, painPoint) {
+        this.preference = preference;
         this.painPoint = painPoint;
     }
 }
