@@ -28,6 +28,16 @@ class PassengerFactory {
         return "Aisle"
     }
 
+    seatClassGenerator() {
+        // if in range 1-8 then economy - if 9 or 10 then first class
+        let seatClassNumber = this.getNormal(5,5);
+        if (seatClassNumber <= 8) {
+            return "Economy"
+        } else {
+            return "First-class"
+        }
+    }
+
 
 
 
@@ -35,7 +45,7 @@ class PassengerFactory {
     createPassengers(numberOfPassengers,seatPrice, deviation) {
         let passengerList = [];
         for (let i = 1; i < numberOfPassengers; i++ ) {
-            let currentPassenger = new Passenger(this.seatTypeGenerator(), this.getNormal(seatPrice,deviation));
+            let currentPassenger = new Passenger(this.seatTypeGenerator(), this.getNormal(seatPrice,deviation), this.seatClassGenerator());
             passengerList.push(currentPassenger);
         }
         return passengerList;
@@ -43,9 +53,10 @@ class PassengerFactory {
 }
 
 class Passenger {
-    constructor(preference, painPoint) {
+    constructor(preference, painPoint, classPreference) {
         this.preference = preference;
         this.painPoint = painPoint;
+        this.classPreference = classPreference;
     }
 }
 
