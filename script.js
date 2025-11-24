@@ -6,25 +6,21 @@ let booker = new Booker(plane)
 let passengerFactory = new PassengerFactory();
 
 // Run simulations
+async function runSimulation(iterations, passengerFactory, booker,plane) {
+    for (let i = 0; i < iterations; i++) {
 
-     async function runSimulation(iterations, passengerFactory, booker,plane) {
-
-        for (let i = 0; i < iterations; i++) {
-
-            console.log(`iteration: ${i}`)
-            //Create passengers
-            let passengerList = passengerFactory.createPassengers(100)
+        //Create passengers
+        let passengerList = passengerFactory.createPassengers(100)
             
-            //Run the booker
-            booker.bookSeats(passengerList, plane.getAvailableSeats())
+        //Run the booker
+        booker.bookSeats(passengerList, plane.getAvailableSeats())
 
-            //Reset the seats and update prices
-            plane.seatResetter()
+        //Reset the seats and update prices
+        plane.seatResetter()
 
-            console.log(plane.getSeat(0,0).price)
-            renderSeatGrid()
+        renderSeatGrid()
 
-            await wait(2000)
+        await wait(2000)
         }
     }
 
