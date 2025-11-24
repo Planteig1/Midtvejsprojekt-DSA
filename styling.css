@@ -49,3 +49,20 @@ canvas#canvas {
     background: #ff6b6b;
 }
 /* AI-gen stops here*/
+
+#plane-container {
+    position: relative;
+    width: 1152px;
+    height: 727px;
+    background-image: url('plane picture.png');
+    background-size: cover;
+}
+
+.seat {
+    position: absolute;
+    width: 24px;
+    height: 28px;
+    border: 1px solid black;
+    border-radius: 4px; 
+    
+}

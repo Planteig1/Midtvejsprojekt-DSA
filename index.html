@@ -7,16 +7,15 @@
     <link rel="stylesheet" href="styling.css">
 </head>
 <body>
-    <canvas id="canvas" width="1152" height="727">
-        <img src="plane picture.png" alt="Sketch of plane" id="plane">
-    </canvas>
+    <div id="plane-container">
+    <!-- Seats will be injected here -->
+    </div>
     
     <!-- Existing seat price display -->
     <button onclick="displaySeatPrice()">Update and Display Seat Price</button>
     <p>Current Seat Price: <span id="displayedPrice">100</span></p>
     
-    <h2>Seat map</h2>
-    <div id="seat-grid"></div>
+    
 
     <!-- NEW SIMULATION CONTROL SECTION -->
     <h2>Simulation Controls</h2>

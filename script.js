@@ -6,23 +6,23 @@ let booker = new Booker(plane)
 let passengerFactory = new PassengerFactory();
 
 // Run simulations
-async function runSimulation(iterations, passengerFactory, booker,plane) {
+async function runSimulation(iterations, passengerFactory, booker, plane) {
     for (let i = 0; i < iterations; i++) {
 
         //Create passengers
         let passengerList = passengerFactory.createPassengers(100)
-            
+
         //Run the booker
         booker.bookSeats(passengerList, plane.getAvailableSeats())
 
         //Reset the seats and update prices
         plane.seatResetter()
 
-        renderSeatGrid()
+        renderSeatsHTML();
 
         await wait(2000)
-        }
     }
+}
 
 const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 runSimulation(30, passengerFactory, booker, plane)
@@ -80,121 +80,66 @@ function passengerSeatChecker(x, y) {
     */
 // passengerSeatChecker(1, 0)
 
+/* THE FOLLOWING CODE IS AI GENERATED USING CHATGPT*/
 // ====== SEAT GRID RENDERING ======
 
-/* THE FOLLOWING CODE IS AI GENERATED USING CHATGPT*/
+
 function getPriceColor(price, min, max) {
     // Prevent division by zero if all prices are the same
-    if (max === min) return `hsl(120, 100%, 50%)`; 
+    if (max === min) return `hsl(120, 100%, 50%)`;
 
     // Normalize to 0-1
     let percentage = (price - min) / (max - min);
-    
+
     // Clamp
     percentage = Math.max(0, Math.min(1, percentage));
 
     // Map 0->Green (120), 1->Red (0)
     const hue = (1 - percentage) * 120;
-    
+
     return `hsl(${hue}, 100%, 40%)`; // 40% lightness makes text easier to read
 }
 
-function renderSeatGrid() {
-    const seatGrid = document.getElementById("seat-grid");
-    if (!seatGrid) return;
-
-    seatGrid.innerHTML = "";
-
-    // --- NEW: Calculate dynamic range for the color gradient ---
-    // We flatten the grid to find the global Min and Max price of seats
-    const allSeats = plane.grid.flat().filter(cell => cell instanceof Seat);
-
-    const maxPrice = 1200;
-    const minPrice = 100;
-    // -----------------------------------------------------------
+function renderSeatsHTML() {
+    const container = document.getElementById("plane-container");
+    container.innerHTML = "";
 
     for (let row = 0; row < plane.rows; row++) {
         for (let col = 0; col < plane.cols; col++) {
-            const cellData = plane.grid[row][col];
-            const cell = document.createElement("div");
 
-            if (cellData instanceof Seat) {
-                cell.classList.add("seat");
+            const cell = plane.grid[row][col];
+            if (!(cell instanceof Seat)) continue;
 
-                // Standard CSS Classes
-                if (cellData.seatClass === "First-class") {
-                    cell.classList.add("first-class");
-                } else {
-                    cell.classList.add("economy");
-                }
+            const seat = document.createElement("div");
+            seat.classList.add("seat");
 
-                // --- NEW: Apply Color Gradient ---
-                // Only apply the color if the seat is NOT booked. 
-                // If it is booked, we let the CSS .booked class handle the color (usually grey/red).
-                if (cellData.isBooked) {
-                    cell.classList.add("booked");
-                    // Note: CSS for .booked should utilize !important or be loaded last 
-                    // to ensure it overrides the gradient if you applied it here.
-                } else {
-                    // Apply the calculated HSL color directly to the element
-                    cell.style.backgroundColor = getPriceColor(cellData.price, minPrice, maxPrice);
-                }
-                // ---------------------------------
+            // Color based on price
+            seat.style.backgroundColor = getPriceColor(cell.price);
 
-                cell.dataset.row = row;
-                cell.dataset.col = col;
-                
-                // Updated Tooltip to show range context
-                cell.title = `${cellData.seatClass} – ${cellData.price.toFixed(2)} kr`;
+            // Position inside plane
+            const GRID_OFFSET_X = 360;   // move grid more to the right
+            const GRID_OFFSET_Y = 40;   // vertical offset stays same
 
-                cell.addEventListener("click", () => {
-                    plane.bookSeat(row, col);
-                    
-                    // NOTE: You need to make sure updateSeatCell also knows how 
-                    // to re-calculate the color, or just call renderSeatGrid() again.
-                    renderSeatGrid(); 
-                    
-                    const updatedSeat = plane.grid[row][col];
-                    const displayedPriceElement = document.getElementById("displayedPrice");
-                    if (displayedPriceElement) {
-                        displayedPriceElement.textContent = updatedSeat.price;
-                    }
-                });
-            } else if (cellData instanceof Aisle) {
-                cell.classList.add("aisle");
-            }
+            const SEAT_SIZE = 23;        // bigger seats
+            const SEAT_SPACING = 6;      // bigger padding
 
-            seatGrid.appendChild(cell);
+            seat.style.width = SEAT_SIZE  + "px";
+            seat.style.height = SEAT_SIZE + 4 + "px";
+
+            seat.style.left = (GRID_OFFSET_X + col * (SEAT_SIZE + SEAT_SPACING)) + "px";
+            seat.style.top = (GRID_OFFSET_Y + row * (SEAT_SIZE + SEAT_SPACING)) + "px";
+
+            container.appendChild(seat);
         }
     }
 }
 
 
 
-function updateSeatCell(cell, seat) {
-    if (!(seat instanceof Seat)) return;
-
-    if (seat.isBooked) {
-        cell.classList.add("booked");
-    } else {
-        cell.classList.remove("booked");
-    }
-
-    cell.title = `${seat.seatClass} ${seat.seatType} – ${seat.price} kr`;
-}
-
-
-
-// Call this once after the plane has been initialized and passengers booked
-
 /* THIS IS THE END OF THE AI GENERATED CODE*/
 
 
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
-const img = document.getElementById("plane");
-ctx.fillStyle = "white";
-// ctx.fillRect(0,0,900,900);
-ctx.drawImage(img, 0, 0);
+
+
 
 
