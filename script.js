@@ -67,7 +67,7 @@ class Plane {
         let curretSeat = this.grid[y][x]
         if (curretSeat.isBooked != true && curretSeat instanceof Seat) {
             curretSeat.isBooked = true;
-            console.log("Seat is now booked");
+            
             plane.priceChanger(curretSeat);
 
 
@@ -138,6 +138,9 @@ function displaySeatPrice() {
 }
 /*
 
+
+
+
 // work in progress - pseudo code to get a general understanding of what is supposed to happen
 // code works - now we need to make it so it scales when we instantiate many passengers 
 function passengerSeatChecker(x, y) {
@@ -170,7 +173,7 @@ console.log(passengerList.length);
 
 
 
-passengerSeatChecker(1, 0)
+// passengerSeatChecker(1, 0)
 
 
 const canvas = document.getElementById("canvas");
