@@ -1,5 +1,5 @@
 class PassengerFactory {
-    constructor(passengerCreator) {
+    constructor() {
     }
 
     // Function to create normal distrubition - Taken from Stack overflow | Could be its own?
@@ -15,14 +15,14 @@ class PassengerFactory {
         return Math.round(mean + (standardNormal * stdDev));
     }
 
-    // Passenger Creation
+    // Passenger Creation - Should also add different seat placements - Window, Middle & Aisle
     createPassengers(numberOfPassengers) {
-        let passengerList = []
+        let passengerList = [];
         for (let i = 1; i < numberOfPassengers; i++ ) {
-            let currentPassenger = new Passenger("Aisle", this.getNormal(100,10))
-            passengerList.push(currentPassenger)
+            let currentPassenger = new Passenger("Aisle", this.getNormal(110,10));
+            passengerList.push(currentPassenger);
         }
-        return passengerList
+        return passengerList;
     }
 }
 
@@ -32,10 +32,5 @@ class Passenger {
         this.painPoint = painPoint;
     }
 }
-let passengerFactory = new PassengerFactory()
-let passengerList = passengerFactory.createPassengers(100)
-console.log(passengerList)
-
-
 
 let passenger = new Passenger("window", 350)

@@ -35,7 +35,7 @@ class Plane {
             for (let j = 0; j < this.cols; j += 1) {
                 //Check for aisle
                 if (j == 3 || j == 8) {
-                    this.grid[i].push(new Aisle(i, j))
+                    this.grid[i].push(new Aisle(j, i))
                 } else {
                     //Check for seat type
                     //Window seat
@@ -54,7 +54,7 @@ class Plane {
                     if (i < 5) {
                         seatClass = "First-class"
                     }
-                    this.grid[i].push(new Seat(i, j, seatClass, seatType))
+                    this.grid[i].push(new Seat(j, i, seatClass, seatType))
                 }
 
             }
@@ -63,14 +63,25 @@ class Plane {
     getSeat(x, y) {
         return this.grid[x][y]; // Handle if we try to look for something thats not a seat
     }
-    bookSeat(seat) {
-        if (seat.isBooked != true && seat instanceof Seat) {
-            seat.isBooked = true;
+    bookSeat(y,x) {
+        let curretSeat = this.grid[y][x]
+        if (curretSeat.isBooked != true && curretSeat instanceof Seat) {
+            curretSeat.isBooked = true;
             console.log("Seat is now booked");
-
         } else {
             console.log("Couldnt book seat");
         }
+    }
+    getAvailableSeats() {
+        let availableSeats = [];
+        for ( const row of this.grid) {
+            for (const seat of row) {
+                if (seat.isBooked != true && seat instanceof Seat) {
+                    availableSeats.push(seat)
+                }
+            }
+        }
+        return availableSeats
     }
 
     priceChanger(seat) {
@@ -87,11 +98,26 @@ class Plane {
 }
 
 
-
 let plane = new Plane(12, 20)
 plane.InitializeGrid()
-plane.bookSeat(plane.getSeat(0, 0))
-plane.bookSeat(plane.getSeat(0, 1))
+console.log(plane.grid)
+
+let booker = new Booker(plane,"asd")
+let passengerFactory = new PassengerFactory();
+let passengerList = passengerFactory.createPassengers(200);
+plane.bookSeat(0,0)
+
+console.log(plane.getAvailableSeats())
+booker.bookSeats(passengerList,plane.getAvailableSeats())
+console.log(plane.getAvailableSeats())
+
+console.log(plane.grid)
+
+
+
+
+
+
 
 // plane.priceChanger(plane.getSeat(0, 1)); --- Works, commented out for testing
 console.log(plane.getSeat(0, 1));
@@ -107,7 +133,7 @@ function displaySeatPrice() {
         displayedPriceElement.textContent = seatToChange.price;
     }
 }
-
+/*
 
 // work in progress - pseudo code to get a general understanding of what is supposed to happen
 // code works - now we need to make it so it scales when we instantiate many passengers 
@@ -122,14 +148,12 @@ function passengerSeatChecker(x, y) {
         plane.bookSeat(plane.getSeat(x, y));
         console.log("Seat has been booked to passenger");
     }
-
-
 }
 
 console.log(plane.getSeat(1,0));
 
 passengerSeatChecker(1, 0)
-
+*/
 
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");

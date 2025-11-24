@@ -1,32 +1,24 @@
 
-
-const returnsTrue25Percent = () => {
-    return Math.random() < 0.25;
-};
-
-
-
 class Booker {
     constructor(plane, seat) {
         this.plane = plane;
         this.seat = seat;
     }
 
-
-
-    bookSeat() {
-        let startX = 0;
-        let startY = 0;
-        let stack = [];
-        let currentSeat = this.plane.grid[startX][startY]
-
-        while (currentSeat != null) {
-            //Check if already booked or an Aisle
-            if (currentSeat.isBooked == true || currentSeat == Aisle) {
-                
+    // Kan eventuelt snakke om noget optimering her: //Add other painpoints/preferances
+    bookSeats(passengerList, availableSeats) {
+        passengerList.forEach(passenger => {
+            for (let i = 0; i < availableSeats.length; i++) {
+                if (availableSeats[i].price <= passenger.painPoint) {
+                    this.plane.bookSeat(availableSeats[i].y,availableSeats[i].x)
+                    availableSeats.splice(i,1);
+                    return;
+                }
             }
+            
+        });
+;
 
-        }
     }
     // work in progress - jonathan (skal det her overhovedet bruges?)
     priceChanger() {
@@ -37,4 +29,3 @@ class Booker {
     }
     
 }
-
