@@ -1,15 +1,16 @@
-# Flysæde-algoritme
+# Plane seat booking algorythm
 ## Install
-Klon repo'et ned, og åben html-filen i din browser ved at dobbeltklikke på index.html i din folder.
+Clone the repo, or fork it, and open the html file in your browser by double clicking the index.html file in your folder.
+Already here should everything be up and running - if it is not, open index.html in your IDE of choice, and then open the index.html file in your browser.
 
-Allerede her burde det alt sammen være oppe at køre - hvis dette ikke virker, så åben index.html og script.js i VSC (eller anden IDE), og åben derefter index.html.
 
 ## VSC Extensions
+
 Name: vscode-pdf
 VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=tomoki1207.pdf
 
 
 
 ## Running the simulation
+When the visualisation is up and running, it will immediately load a visualisation of a plane with seats. Next to the plane, there will be 
 
-Når visualiseringen er oppe at køre, vil den med det samme indlæse en visualisering af et fly med pladser. Ved siden af flyet vil der være

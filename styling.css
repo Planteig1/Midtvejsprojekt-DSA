@@ -5,4 +5,47 @@ canvas#canvas {
     justify-content: center;
 
 }
+/* FROM HERE - is ai-generated through Chatgpt*/
+/* Seat grid layout */
+#seat-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 30px); /* 12 columns like your Plane(12, 20) */
+    gap: 4px;
+    margin-top: 20px;
+}
 
+/* Base seat cell */
+.seat,
+.aisle {
+    width: 30px;
+    height: 30px;
+    box-sizing: border-box;
+}
+
+/* Aisle cells */
+.aisle {
+    background: #ccc;
+    border: 1px solid #999;
+}
+
+/* Regular seat */
+.seat {
+    border: 1px solid #555;
+    cursor: pointer;
+}
+
+/* First class seats */
+.seat.first-class {
+    background: #ffd700; /* gold-ish */
+}
+
+/* Economy seats */
+.seat.economy {
+    background: #a0d8ff;
+}
+
+/* Booked seats */
+.seat.booked {
+    background: #ff6b6b;
+}
+/* AI-gen stops here*/

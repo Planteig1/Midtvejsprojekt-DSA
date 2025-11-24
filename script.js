@@ -196,6 +196,83 @@ function passengerSeatChecker(x, y) {
     */
 // passengerSeatChecker(1, 0)
 
+// ====== SEAT GRID RENDERING ======
+
+/* THE FOLLOWING CODE IS AI GENERATED USING CHATGPT*/
+function renderSeatGrid() {
+    const seatGrid = document.getElementById("seat-grid");
+    if (!seatGrid) return;
+
+    // Clear any existing content
+    seatGrid.innerHTML = "";
+
+    for (let row = 0; row < plane.rows; row++) {
+        for (let col = 0; col < plane.cols; col++) {
+            const cellData = plane.grid[row][col];
+            const cell = document.createElement("div");
+
+            if (cellData instanceof Seat) {
+                cell.classList.add("seat");
+
+                // Class-based colouring
+                if (cellData.seatClass === "First-class") {
+                    cell.classList.add("first-class");
+                } else {
+                    cell.classList.add("economy");
+                }
+
+                // Booked state
+                if (cellData.isBooked) {
+                    cell.classList.add("booked");
+                }
+
+                // For later reference
+                cell.dataset.row = row;
+                cell.dataset.col = col;
+
+                // Tooltip
+                cell.title = `${cellData.seatClass} ${cellData.seatType} – ${cellData.price} kr`;
+
+                // Click to toggle booking & update price
+                cell.addEventListener("click", () => {
+                    // Your bookSeat takes (y, x) = (row, col)
+                    plane.bookSeat(row, col);
+
+                    const updatedSeat = plane.grid[row][col];
+                    updateSeatCell(cell, updatedSeat);
+
+                    // Also update the price display on the page
+                    const displayedPriceElement = document.getElementById("displayedPrice");
+                    if (displayedPriceElement) {
+                        displayedPriceElement.textContent = updatedSeat.price;
+                    }
+                });
+            } else if (cellData instanceof Aisle) {
+                // Aisle cell
+                cell.classList.add("aisle");
+            }
+
+            seatGrid.appendChild(cell);
+        }
+    }
+}
+
+function updateSeatCell(cell, seat) {
+    if (!(seat instanceof Seat)) return;
+
+    if (seat.isBooked) {
+        cell.classList.add("booked");
+    } else {
+        cell.classList.remove("booked");
+    }
+
+    cell.title = `${seat.seatClass} ${seat.seatType} – ${seat.price} kr`;
+}
+
+// Call this once after the plane has been initialized and passengers booked
+renderSeatGrid();
+/* THIS IS THE END OF THE AI GENERATED CODE*/
+
 
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
