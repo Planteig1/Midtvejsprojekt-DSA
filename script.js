@@ -63,7 +63,7 @@ class Plane {
     getSeat(x, y) {
         return this.grid[x][y]; // Handle if we try to look for something thats not a seat
     }
-    bookSeat(y,x) {
+    bookSeat(y, x) {
         let curretSeat = this.grid[y][x]
         if (curretSeat.isBooked != true && curretSeat instanceof Seat) {
             curretSeat.isBooked = true;
@@ -77,7 +77,7 @@ class Plane {
     }
     getAvailableSeats() {
         let availableSeats = [];
-        for ( const row of this.grid) {
+        for (const row of this.grid) {
             for (const seat of row) {
                 if (seat.isBooked != true && seat instanceof Seat) {
                     availableSeats.push(seat)
@@ -92,9 +92,25 @@ class Plane {
             seat.price = seat.price + 50;
             console.log("Price of seat has been changed");
 
-        } else {
+        } else if (seat.isBooked == false) {
+            seat.price = seat.price - 50;
             console.log("Seat has not been booked");
 
+        }
+
+    }
+
+    seatResetter() {
+        for (const row of this.grid) {
+            for (const seat of row) {
+                if (seat.isBooked == true) {
+                    plane.priceChanger(seat);
+                    seat.isBooked = false;
+                } else if (seat.isBooked == false) {
+                    plane.priceChanger(seat);
+
+                }
+            }
         }
 
     }
@@ -105,13 +121,13 @@ let plane = new Plane(12, 20)
 plane.InitializeGrid()
 console.log(plane.grid)
 
-let booker = new Booker(plane,"asd")
+let booker = new Booker(plane, "asd")
 let passengerFactory = new PassengerFactory();
 let passengerList = passengerFactory.createPassengers(200);
-plane.bookSeat(0,0)
+plane.bookSeat(0, 0)
 
 console.log(plane.getAvailableSeats())
-booker.bookSeats(passengerList,plane.getAvailableSeats())
+booker.bookSeats(passengerList, plane.getAvailableSeats())
 console.log(plane.getAvailableSeats())
 
 console.log(plane.grid)
@@ -164,13 +180,13 @@ function passengerSeatChecker(x, y) {
 
 
 }
-    */ 
+    */
 
 console.log(passengerList.length);
 
 
 
-passengerSeatChecker(1, 0)
+// passengerSeatChecker(1, 0)
 
 
 const canvas = document.getElementById("canvas");
