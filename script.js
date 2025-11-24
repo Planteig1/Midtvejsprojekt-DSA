@@ -129,7 +129,7 @@ let passengerFactory = new PassengerFactory();
 
             console.log(`iteration: ${i}`)
             //Create passengers
-            let passengerList = passengerFactory.createPassengers(200)
+            let passengerList = passengerFactory.createPassengers(100)
             
             //Run the booker
             booker.bookSeats(passengerList, plane.getAvailableSeats())
@@ -138,9 +138,10 @@ let passengerFactory = new PassengerFactory();
             plane.seatResetter()
 
             console.log(plane.getSeat(0,0).price)
+            renderSeatGrid()
         }
     }
-    
+
 runSimulation(30, passengerFactory, booker, plane)
 
 
@@ -199,12 +200,35 @@ function passengerSeatChecker(x, y) {
 // ====== SEAT GRID RENDERING ======
 
 /* THE FOLLOWING CODE IS AI GENERATED USING CHATGPT*/
+function getPriceColor(price, min, max) {
+    // Prevent division by zero if all prices are the same
+    if (max === min) return `hsl(120, 100%, 50%)`; 
+
+    // Normalize to 0-1
+    let percentage = (price - min) / (max - min);
+    
+    // Clamp
+    percentage = Math.max(0, Math.min(1, percentage));
+
+    // Map 0->Green (120), 1->Red (0)
+    const hue = (1 - percentage) * 120;
+    
+    return `hsl(${hue}, 100%, 40%)`; // 40% lightness makes text easier to read
+}
+
 function renderSeatGrid() {
     const seatGrid = document.getElementById("seat-grid");
     if (!seatGrid) return;
 
-    // Clear any existing content
     seatGrid.innerHTML = "";
+
+    // --- NEW: Calculate dynamic range for the color gradient ---
+    // We flatten the grid to find the global Min and Max price of seats
+    const allSeats = plane.grid.flat().filter(cell => cell instanceof Seat);
+
+    const maxPrice = 1200;
+    const minPrice = 100;
+    // -----------------------------------------------------------
 
     for (let row = 0; row < plane.rows; row++) {
         for (let col = 0; col < plane.cols; col++) {
@@ -214,41 +238,46 @@ function renderSeatGrid() {
             if (cellData instanceof Seat) {
                 cell.classList.add("seat");
 
-                // Class-based colouring
+                // Standard CSS Classes
                 if (cellData.seatClass === "First-class") {
                     cell.classList.add("first-class");
                 } else {
                     cell.classList.add("economy");
                 }
 
-                // Booked state
+                // --- NEW: Apply Color Gradient ---
+                // Only apply the color if the seat is NOT booked. 
+                // If it is booked, we let the CSS .booked class handle the color (usually grey/red).
                 if (cellData.isBooked) {
                     cell.classList.add("booked");
+                    // Note: CSS for .booked should utilize !important or be loaded last 
+                    // to ensure it overrides the gradient if you applied it here.
+                } else {
+                    // Apply the calculated HSL color directly to the element
+                    cell.style.backgroundColor = getPriceColor(cellData.price, minPrice, maxPrice);
                 }
+                // ---------------------------------
 
-                // For later reference
                 cell.dataset.row = row;
                 cell.dataset.col = col;
+                
+                // Updated Tooltip to show range context
+                cell.title = `${cellData.seatClass} – ${cellData.price.toFixed(2)} kr`;
 
-                // Tooltip
-                cell.title = `${cellData.seatClass} ${cellData.seatType} – ${cellData.price} kr`;
-
-                // Click to toggle booking & update price
                 cell.addEventListener("click", () => {
-                    // Your bookSeat takes (y, x) = (row, col)
                     plane.bookSeat(row, col);
-
+                    
+                    // NOTE: You need to make sure updateSeatCell also knows how 
+                    // to re-calculate the color, or just call renderSeatGrid() again.
+                    renderSeatGrid(); 
+                    
                     const updatedSeat = plane.grid[row][col];
-                    updateSeatCell(cell, updatedSeat);
-
-                    // Also update the price display on the page
                     const displayedPriceElement = document.getElementById("displayedPrice");
                     if (displayedPriceElement) {
                         displayedPriceElement.textContent = updatedSeat.price;
                     }
                 });
             } else if (cellData instanceof Aisle) {
-                // Aisle cell
                 cell.classList.add("aisle");
             }
 
@@ -256,6 +285,8 @@ function renderSeatGrid() {
         }
     }
 }
+
+
 
 function updateSeatCell(cell, seat) {
     if (!(seat instanceof Seat)) return;
@@ -269,8 +300,10 @@ function updateSeatCell(cell, seat) {
     cell.title = `${seat.seatClass} ${seat.seatType} – ${seat.price} kr`;
 }
 
+
+
 // Call this once after the plane has been initialized and passengers booked
-renderSeatGrid();
+
 /* THIS IS THE END OF THE AI GENERATED CODE*/
 
 
