@@ -87,6 +87,7 @@ class Plane {
     priceChanger(seat) {
         if (seat.isBooked == true) {
             seat.price = seat.price + 50;
+            
             // console.log("Price of seat has been changed");
 
         } else if (seat.isBooked == false) {

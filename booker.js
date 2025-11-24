@@ -14,7 +14,6 @@ class Booker {
                 if (availableSeats[i].price <= passenger.painPoint && passenger.preference == availableSeats[i].seatType) {
                     this.plane.bookSeat(availableSeats[i].y,availableSeats[i].x)
                     availableSeats.splice(i,1);
-                    
                     return;
                 }
             }
@@ -24,7 +23,7 @@ class Booker {
                 if (availableSeats[i].price <= passenger.painPoint) {
                     this.plane.bookSeat(availableSeats[i].y,availableSeats[i].x)
                     availableSeats.splice(i,1);
-                    
+
                     return;
                 }
             }

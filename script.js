@@ -5,9 +5,10 @@ plane.InitializeGrid()
 let booker = new Booker(plane)
 let passengerFactory = new PassengerFactory();
 
+
 let runSimulationButton = document.getElementById("startSimulation")
 
-// FIX: read values only when button clicked
+
 runSimulationButton.addEventListener("click", () => {
 
     let iterations = parseInt(document.getElementById("iterations").value);
@@ -16,12 +17,15 @@ runSimulationButton.addEventListener("click", () => {
     let budgetChangeInput = parseInt(document.getElementById("budgetChangeInput").value);
     let startingMoneyInput = parseInt(document.getElementById("startingMoneyInput").value);
 
-    // Call your simulation function with the updated values
+    
     runSimulation(
         iterations,
         passengerFactory,
         booker,
-        plane
+        plane,
+        passengerCount,
+        seatPriceInput,
+        budgetChangeInput
     );
 });
 
@@ -30,11 +34,12 @@ runSimulationButton.addEventListener("click", () => {
 
 const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-async function runSimulation(iterations, passengerFactory, booker,plane) {
+async function runSimulation(iterations, passengerFactory, booker,plane,passengerCount,seatPriceInput,budgetChangeInput) {
     for (let i = 0; i < iterations; i++) {
-
+        console.log(i)
+        console.log(plane.getSeat(0,0).price)
         //Create passengers
-        let passengerList = passengerFactory.createPassengers(100)
+        let passengerList = passengerFactory.createPassengers(passengerCount,seatPriceInput,budgetChangeInput)
 
         //Run the booker
         booker.bookSeats(passengerList, plane.getAvailableSeats())
@@ -44,10 +49,9 @@ async function runSimulation(iterations, passengerFactory, booker,plane) {
 
         renderSeatsHTML();
 
-        await wait(2000)
+        await wait(1000)
     }
 }
-
 
 
 
@@ -108,12 +112,14 @@ function passengerSeatChecker(x, y) {
 // ====== SEAT GRID RENDERING ======
 
 
-function getPriceColor(price, min, max) {
+function getPriceColor(seatPriceInput,) {
+    let min = 0
+    let max = 1000
     // Prevent division by zero if all prices are the same
     if (max === min) return `hsl(120, 100%, 50%)`;
 
     // Normalize to 0-1
-    let percentage = (price - min) / (max - min);
+    let percentage = (seatPriceInput - min) / (max - min);
 
     // Clamp
     percentage = Math.max(0, Math.min(1, percentage));

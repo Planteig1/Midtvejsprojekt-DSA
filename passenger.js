@@ -32,10 +32,10 @@ class PassengerFactory {
 
 
     // Passenger Creation - Should also add different seat placements - Window, Middle & Aisle
-    createPassengers(numberOfPassengers) {
+    createPassengers(numberOfPassengers,seatPrice, deviation) {
         let passengerList = [];
         for (let i = 1; i < numberOfPassengers; i++ ) {
-            let currentPassenger = new Passenger(this.seatTypeGenerator(), this.getNormal(1000,10));
+            let currentPassenger = new Passenger(this.seatTypeGenerator(), this.getNormal(seatPrice,deviation));
             passengerList.push(currentPassenger);
         }
         return passengerList;
