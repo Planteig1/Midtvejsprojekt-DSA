@@ -1,12 +1,6 @@
 # Evaluering
 *Dette er vores egen evaluering af midtvejsopgaven.*
-### Algoritme-valg
-
-
-
-
-
-### Datastrukturer
+### Algoritme-valg & Datastrukturer
 
 I dette projekt har vi valgt at modellere flyet som et todimensionelt array. Implementeringen er udført ved hjælp af nested loops, hvilket giver en klar og effektiv struktur. Valget af denne løsning bygger på flere overvejelser:
 
@@ -18,7 +12,23 @@ Ved at kombinere 2D-arrayet med objektorienteret design har vi kunnet repræsent
 
 Udover vores 2D-array benytter vi også en række lister til at understøtte simulationens logik . En af de vigtigste designbeslutninger har handlet om, hvordan vi håndterer ledige sæder på en effektiv måde.
 
-I stedet for løbende at scanne hele sæde-grid’et for ledige pladser valgte vi at indsamle alle ledige sæder én gang i starten af hver iteration og opbevare dem i en separat liste. Når et sæde bliver booket, fjernes det med det samme fra listen. På den måde arbejder bookeren altid med en opdateret og filtreret mængde af muligheder, uden at skulle foretage 
-gentagne gennemløb af hele grid’et.
+I stedet for løbende at scanne hele sæde-grid’et for ledige pladser valgte vi at indsamle alle ledige sæder én gang i starten af hver iteration og opbevare dem i en separat liste. Når et sæde bliver booket, fjernes det med det samme fra listen. På den måde arbejder bookeren altid med en opdateret og filtreret mængde af muligheder, uden at skulle foretage gentagne gennemløb af hele grid’et.
 
 Denne tilgang har resulteret i en markant forbedring i køretiden, da vi undgår unødvendige, gentagne scanninger af grid’et og i stedet arbejder direkte på en mindre og mere relevant datastruktur. 
+
+
+Hvis vi kigger på vores booking-algoritme, ser vi, at dens tidskompleksitet er O(m*n)
+Begrundelsen er, at for hver passager (m passagerer) gennemgår vi listen over ledige sæder (n sæder) op til 4 gange (én for hver søgning: pris + type + klasse, pris + type, type + klasse, pris).
+
+I værste fald får vi derfor:
+
+O(m⋅n+m⋅n+m⋅n+m⋅n) = O(4*m*n) 
+
+Da Big O notation ignorerer konstante, bliver kompleksiteten:
+O(m*n)
+
+Vi ser mulighed for potentielle forbedringer og optimeringer af algoritmens tidskompleksitet. Den nuværende løsning gennemgår listen over ledige sæder flere gange for hver passager, hvilket giver en O(m·n) kompleksitet. Ved at anvende mere effektive datastrukturer, såsom grupperede lister efter sædetyper eller prisintervaller, kunne vi reducere antallet af nødvendige gennemløb og dermed optimere algoritmen
+
+
+
+

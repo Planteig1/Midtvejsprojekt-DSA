@@ -48,7 +48,6 @@ class Booker {
                 }
             }
         });
-        ;
 
     }
     // work in progress - jonathan (skal det her overhovedet bruges?)
