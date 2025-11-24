@@ -1,12 +1,7 @@
 # Evaluering
 *Dette er vores egen evaluering af midtvejsopgaven.*
-### Algoritme-valg
 
-
-
-
-
-### Datastrukturer
+### Datastrukturer & Algoritmer
 
 I dette projekt har vi valgt at modellere flyet som et todimensionelt array. Implementeringen er udført ved hjælp af nested loops, hvilket giver en klar og effektiv struktur. Valget af denne løsning bygger på flere overvejelser:
 
@@ -22,3 +17,15 @@ I stedet for løbende at scanne hele sæde-grid’et for ledige pladser valgte v
 gentagne gennemløb af hele grid’et.
 
 Denne tilgang har resulteret i en markant forbedring i køretiden, da vi undgår unødvendige, gentagne scanninger af grid’et og i stedet arbejder direkte på en mindre og mere relevant datastruktur. 
+
+
+### Visualisering og simulering
+
+#### Visualisering
+Vi valgte at visualisere, og derved evaluere, vores algoritmer og datastrukturer ved at illustrere et fly med sæder på vores html side. Dette gjorde vi for at kunne bedre vise vores algoritmer over flere iterationer, og så man bedre kunne se de pladsfordelinger der er, grundet vores normalfordeling (bellcurve fordeling). Dette har mundet sig ud i, at vi har et grid af sæder der står hen over et tegnet fly. Disse sæder starter ud som grønne, og bliver alt ud fra deres pris mere røde, hvis de stiger i pris. Vi valgte denne farvenotering med udgangspunkt i passageren, dog kunne man have vendt farverne om, så de blev mere grønne jo højere prisen gik, hvis man tog udgangspunkt i flyselskabet.
+
+Dette giver en meget intuitiv forståelse af, hvordan prisændringerne forekommer, og på hvilke sæder det sker på først, frem for de andre.
+
+#### Simulering
+Til vores simulering kører vi vores algoritmer hen over en valgt mængde iterationer, som bliver valgt på html siden. Dette giver os god mulighed for at simulere fremgangen i pris på pladser der bliver købt af passagerer. En lille forudsætning er at flyet ikke er ved kapacitet, da sæderne så ellers altid vil blive købt, indtil de når den specifikke, udregnede smertegrænse som de har. Smertegrænsen vil være forskellig for hver person, da vi har brugt en normalkurve til at udregne smertegrænsen, som betyder at forskellige passagerer har forskellige mængder af penge de er villige til at betale. Dertil er 
+

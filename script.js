@@ -77,6 +77,7 @@ function displaySeatPrice() {
     }
 }
 
+/* THIS IS THE START OF THE AI GENERATED CODE FOR VISUALISATION*/
 function getPriceColor(seatPriceInput,) {
     let min = 0
     let max = 1000
@@ -160,7 +161,7 @@ function displayProfit() {
     }
 }
 
-/* THIS IS THE END OF THE AI GENERATED CODE*/
+/* THIS IS THE END OF THE AI GENERATED CODE FOR VISUALISATION*/
 
 
 
