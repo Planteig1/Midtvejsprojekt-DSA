@@ -27,8 +27,8 @@ class PassengerFactory {
 }
 
 class Passenger {
-    constructor(preferance, painPoint) {
-        this.preferance = preferance;
+    constructor(preference, painPoint) {
+        this.preference = preference;
         this.painPoint = painPoint;
     }
 }

@@ -68,6 +68,9 @@ class Plane {
         if (curretSeat.isBooked != true && curretSeat instanceof Seat) {
             curretSeat.isBooked = true;
             console.log("Seat is now booked");
+            plane.priceChanger(curretSeat);
+
+
         } else {
             console.log("Couldnt book seat");
         }
@@ -86,8 +89,8 @@ class Plane {
 
     priceChanger(seat) {
         if (seat.isBooked == true) {
-            seat.price = seat.price * 2;
-            console.log("Price has been changed");
+            seat.price = seat.price + 50;
+            console.log("Price of seat has been changed");
 
         } else {
             console.log("Seat has not been booked");
@@ -137,23 +140,38 @@ function displaySeatPrice() {
 
 // work in progress - pseudo code to get a general understanding of what is supposed to happen
 // code works - now we need to make it so it scales when we instantiate many passengers 
-const passenger1 = new Passenger("Window", 350)
 function passengerSeatChecker(x, y) {
+    const thisX = x;
+    const thisY = y;
+    const seat = plane.getSeat(x, y);
+    const responses = [];
 
-    if (plane.getSeat(x, y).price > passenger1.painPoint || plane.getSeat(x, y).seatType != passenger1.preferance) {
-        console.log("Seat not applicable for passenger");
-    }
+    for (let i = 0; i < passengerList.length; i++) {
+        const passenger = passengerList[i];
+        const passengerCount = i + 1;
 
-    if (plane.getSeat(x, y).price <= passenger1.painPoint && plane.getSeat(x, y).seatType == passenger1.preferance) {
-        plane.bookSeat(plane.getSeat(x, y));
-        console.log("Seat has been booked to passenger");
+        if (seat.price > passenger.painPoint || seat.seatType != passenger.preference || seat.isBooked == true) {
+            responses.push(`The seat, seat (${thisX}, ${thisY}), could not be booked for passenger ${passengerCount}`);
+
+        } else if (seat.price <= passenger.painPoint && seat.seatType == passenger.preference && seat.isBooked == false) {
+            plane.bookSeat(plane.getSeat(x, y));
+            responses.push(`The seat, seat (${thisX}, ${thisY}), is now booked to passenger ${passengerCount}`);
+
+        }
+
     }
+    console.log(responses);
+
+
 }
+    */ 
 
-console.log(plane.getSeat(1,0));
+console.log(passengerList.length);
+
+
 
 passengerSeatChecker(1, 0)
-*/
+
 
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
