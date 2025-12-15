@@ -8,48 +8,40 @@ class Booker {
     bookSeats(passengerList, availableSeats) {
         passengerList.forEach(passenger => {
 
+            // Save current best seat.
+            let currentBestSeat;
+            let bestSeatIndex;
+
+
             //Check first if available seatType and price matches - Else check just for price. 
             //Check for price AND preferance AND class
             for (let i = 0; i < availableSeats.length; i++) {
-                if (availableSeats[i].price <= passenger.painPoint && passenger.preference == availableSeats[i].seatType && availableSeats[i].seatClass == passenger.classPreference) {
-                    this.plane.bookSeat(availableSeats[i].y, availableSeats[i].x)
-                    availableSeats.splice(i, 1);
-                    return;
-                }
-            }
-
-            //Check for price AND type.
-            for (let i = 0; i < availableSeats.length; i++) {
-                if (availableSeats[i].price <= passenger.painPoint && availableSeats[i].seatType == passenger.preference) {
-                    this.plane.bookSeat(availableSeats[i].y, availableSeats[i].x)
-                    availableSeats.splice(i, 1);
-
-                    return;
-                }
-            }
-
-            // Check for type AND class.
-            for (let i = 0; i < availableSeats.length; i++) {
-                if (availableSeats[i].seatType <= passenger.preference && availableSeats[i].seatClass == passenger.classPreference) {
-                    this.plane.bookSeat(availableSeats[i].y, availableSeats[i].x)
-                    availableSeats.splice(i, 1);
-
-                    return;
-                }
-            }
-
-            // Check only for price.
-            for (let i = 0; i < availableSeats.length; i++) {
+                //Check price
                 if (availableSeats[i].price <= passenger.painPoint) {
-                    this.plane.bookSeat(availableSeats[i].y, availableSeats[i].x)
-                    availableSeats.splice(i, 1);
+                    currentBestSeat = availableSeats[i]
+                    bestSeatIndex = i
+                    //Check price and preference
+                    if (passenger.preference == availableSeats[i].seatType) {
+                        currentBestSeat = availableSeats[i]
+                        bestSeatIndex = i
+                        //Check proice, preference and classPreference
+                         if (availableSeats[i].seatClass == passenger.classPreference) {
+                            currentBestSeat = availableSeats[i]
+                            bestSeatIndex = i
 
-                    return;
+                            //No need to keep looking.
+                            break;
+                    }
                 }
             }
-        });
-
-    }
+        }
+        // Only book if we found a seat
+        if (currentBestSeat && bestSeatIndex) {
+            this.plane.bookSeat(currentBestSeat.y, currentBestSeat.x)
+            availableSeats.splice(bestSeatIndex, 1);
+        }
+    });
+}
     // work in progress - jonathan (skal det her overhovedet bruges?)
     priceChanger() {
         let seatToChange = this.plane.grid[startX][startY]

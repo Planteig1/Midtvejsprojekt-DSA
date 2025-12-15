@@ -15,18 +15,14 @@ class PassengerFactory {
         return Math.round(mean + (standardNormal * stdDev));
     }
 
-    seatTypeGenerator() {
-        // if between 1-4 Window, 5-6 middle, 7-10 aisle
-        let seatTypeNumber = this.getNormal(5,5);
-        if (seatTypeNumber < 4) {
-            return "Window"
-        }
-        if (seatTypeNumber >= 5 && seatTypeNumber < 7) {
-            return "Middle"
-        }
 
-        return "Aisle"
+    seatTypeGenerator() {
+        const r = Math.random();
+        if (r < 0.4) return "Window";     // 40%
+        if (r < 0.6 && r < 0.8) return "Middle";// 20%
+        return "Aisle";                   // 40%
     }
+
 
     seatClassGenerator() {
         // if in range 1-8 then economy - if 9 or 10 then first class
