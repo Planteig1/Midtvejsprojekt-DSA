@@ -29,9 +29,9 @@ class Booker {
                 }
             }
 
-            // Check for type AND class.
+            // Check for price AND class.
             for (let i = 0; i < availableSeats.length; i++) {
-                if (availableSeats[i].seatType <= passenger.preference && availableSeats[i].seatClass == passenger.classPreference) {
+                if (availableSeats[i].price <= passenger.painPoint && availableSeats[i].seatClass == passenger.classPreference) {
                     this.plane.bookSeat(availableSeats[i].y, availableSeats[i].x)
                     availableSeats.splice(i, 1);
 
