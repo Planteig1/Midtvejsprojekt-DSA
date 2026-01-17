@@ -37,8 +37,8 @@ const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 async function runSimulation(iterations, passengerFactory, booker,plane,passengerCount,startingMoneyInput,budgetChangeInput) {
     for (let i = 0; i < iterations; i++) {
-        console.log(i)
-        console.log(plane.getSeat(0,0).price)
+        console.log(i + 1)
+        console.log(plane.getSeat(0,1).price)
         //Create passengers
         let passengerList = passengerFactory.createPassengers(passengerCount,startingMoneyInput,budgetChangeInput)
 
