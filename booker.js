@@ -11,7 +11,8 @@ class Booker {
             //Check first if available seatType and price matches - Else check just for price. 
             //Check for price AND preferance AND class
             for (let i = 0; i < availableSeats.length; i++) {
-                if (availableSeats[i].price <= passenger.painPoint && passenger.preference == availableSeats[i].seatType && availableSeats[i].seatClass == passenger.classPreference) {
+                if (availableSeats[i].price <= passenger.painPoint && passenger.preference == availableSeats[i].seatType && 
+                    availableSeats[i].seatClass == passenger.classPreference) {
                     this.plane.bookSeat(availableSeats[i].y, availableSeats[i].x)
                     availableSeats.splice(i, 1);
                     return;
