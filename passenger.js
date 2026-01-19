@@ -1,3 +1,11 @@
+class Passenger {
+    constructor(preference, painPoint, classPreference) {
+        this.preference = preference;
+        this.painPoint = painPoint;
+        this.classPreference = classPreference;
+    }
+}
+
 class PassengerFactory {
     constructor() {
     }
@@ -10,6 +18,7 @@ class PassengerFactory {
         while(v === 0) v = Math.random();
         return Math.sqrt( -2.0 * Math.log( u ) ) * Math.cos( 2.0 * Math.PI * v );
     }
+
     getNormal(mean, stdDev) {
         let standardNormal = this.boxMullerRandom();
         return Math.round(mean + (standardNormal * stdDev));
@@ -38,9 +47,6 @@ class PassengerFactory {
         }
     }
 
-
-
-
     // Passenger Creation - Should also add different seat placements - Window, Middle & Aisle
     createPassengers(numberOfPassengers,mean, deviation) {
         let passengerList = [];
@@ -52,12 +58,5 @@ class PassengerFactory {
     }
 }
 
-class Passenger {
-    constructor(preference, painPoint, classPreference) {
-        this.preference = preference;
-        this.painPoint = painPoint;
-        this.classPreference = classPreference;
-    }
-}
 
-let passenger = new Passenger("window", 350)
+

@@ -27,7 +27,6 @@ class Plane {
         this.occupiedSeats = [];
     }
 
-
     InitializeGrid() {
         for (let i = 0; i < this.rows; i += 1) {
             let seatClass = "Economy"
@@ -57,13 +56,14 @@ class Plane {
                     }
                     this.grid[i].push(new Seat(j, i, seatClass, seatType))
                 }
-
             }
         }
     }
+
     getSeat(x, y) {
         return this.grid[x][y]; // Handle if we try to look for something thats not a seat
     }
+
     bookSeat(y, x) {
         let curretSeat = this.grid[y][x]
         if (curretSeat.isBooked != true && curretSeat instanceof Seat) {
@@ -73,6 +73,7 @@ class Plane {
             console.log("Couldnt book seat");
         }
     }
+
     getAvailableSeats() {
         let availableSeats = [];
         for (const row of this.grid) {
@@ -89,18 +90,12 @@ class Plane {
         if (seat.isBooked == true) {
             seat.price = seat.price + 50;
             
-            // console.log("Price of seat has been changed");
-
         } else if (seat.isBooked == false) {
             if (seat.price <= 0) {
                 seat.price = 0
             } else {
-                 seat.price = seat.price - 50;
+                seat.price = seat.price - 50;
             }
-
-
-           //  console.log("Seat has not been booked");
-
         }
 
     }

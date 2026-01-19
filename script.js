@@ -6,9 +6,7 @@ let booker = new Booker(plane)
 let passengerFactory = new PassengerFactory();
 renderSeatsHTML();
 
-
 let runSimulationButton = document.getElementById("startSimulation")
-
 
 runSimulationButton.addEventListener("click", () => {
 
@@ -30,9 +28,7 @@ runSimulationButton.addEventListener("click", () => {
     
 });
 
-
 // Run simulations
-
 const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 async function runSimulation(iterations, passengerFactory, booker,plane,passengerCount,startingMoneyInput,budgetChangeInput) {
@@ -55,14 +51,6 @@ async function runSimulation(iterations, passengerFactory, booker,plane,passenge
     }
 }
 
-
-
-
-
-
-
-
-// plane.priceChanger(plane.getSeat(0, 1)); --- Works, commented out for testing
 console.log(plane.getSeat(0, 1));
 
 // function for displaying on html
@@ -130,9 +118,7 @@ function renderSeatsHTML() {
     }
 }
 
-
 // ===== PROFIT CALCULATOR =====
-
 // Sum of all positive price increases on seats
 function calculateTotalProfit() {
     let totalProfit = 0;
