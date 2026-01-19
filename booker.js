@@ -1,4 +1,3 @@
-
 class Booker {
     constructor(plane) {
         this.plane = plane;
