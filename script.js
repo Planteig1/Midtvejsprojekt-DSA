@@ -33,8 +33,7 @@ const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 async function runSimulation(iterations, passengerFactory, booker,plane,passengerCount,startingMoneyInput,budgetChangeInput) {
     for (let i = 0; i < iterations; i++) {
-        console.log(i + 1)
-        console.log(plane.getSeat(0,1).price)
+        console.log(`${i + 1}. iteration - price of seat(x=1, y=0) =`, plane.getSeat(0,1).price)
         //Create passengers
         let passengerList = passengerFactory.createPassengers(passengerCount,startingMoneyInput,budgetChangeInput)
 
@@ -49,6 +48,7 @@ async function runSimulation(iterations, passengerFactory, booker,plane,passenge
 
         await wait(1000)
     }
+    console.log(plane.getSeat(0, 1));
 }
 
 console.log(plane.getSeat(0, 1));
